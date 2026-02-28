@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pass-ai — AI Study Prep for UK Students</title>
+<meta name="description" content="AI-powered exam preparation for UK students. Choose your path — GCSE & A-Level or 11+ preparation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f1b2d;
+    --cream: #f7f3ec;
+    --cream-dark: #ede7dc;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --sage: #4a7c59;
+    --sage-pale: #e8f2eb;
+    --sage-mid: #5a9169;
+    --amber: #d47c2f;
+    --muted: #6b7a8d;
+    --text: #1c2b3a;
+    --border: rgba(15,27,45,0.1);
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--navy);
+    color: var(--text);
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── NAV ── */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem; height: 64px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    flex-shrink: 0;
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: -0.01em;
+  }
+
+  .nav-logo .dot { color: var(--gold); }
+
+  .nav-tag {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    font-family: var(--sans);
+  }
+
+  /* ── MAIN SPLIT ── */
+  .split {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+  }
+
+  .split::after {
+    content: '';
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 1px; height: 60%;
+    background: rgba(255,255,255,0.08);
+  }
+
+  /* GCSE PANEL */
+  .panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 3rem;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none;
+    overflow: hidden;
+  }
+
+  .panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .panel:hover::before { opacity: 1; }
+
+  .panel-gcse::before { background: radial-gradient(ellipse at center, rgba(201,168,76,0.07) 0%, transparent 70%); }
+  .panel-11plus::before { background: radial-gradient(ellipse at center, rgba(74,124,89,0.1) 0%, transparent 70%); }
+
+  .panel:hover .panel-arrow { transform: translateX(4px); }
+
+  .panel-tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    margin-bottom: 2rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+
+  .panel-gcse .panel-tag { color: var(--gold); }
+  .panel-11plus .panel-tag { color: var(--sage-light, #7aab88); }
+
+  .tag-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  .gcse-dot { background: var(--gold); }
+  .plus-dot { background: #7aab88; }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .panel-name {
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.625rem;
+  }
+
+  .panel-name .slash { color: rgba(255,255,255,0.15); }
+
+  .panel-gcse .panel-name .product { color: var(--gold-light); }
+  .panel-11plus .panel-name .product { color: #7aab88; }
+
+  .panel-headline {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3.5vw, 3.25rem);
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    text-align: center;
+    margin-bottom: 1.25rem;
+    max-width: 380px;
+  }
+
+  .panel-gcse .panel-headline { color: var(--cream); }
+  .panel-11plus .panel-headline { color: var(--cream); }
+
+  .panel-headline em { font-style: italic; }
+  .panel-gcse .panel-headline em { color: var(--gold); }
+  .panel-11plus .panel-headline em { color: #7aab88; }
+
+  .panel-desc {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    max-width: 320px;
+    line-height: 1.75;
+    margin-bottom: 2rem;
+  }
+
+  .panel-for {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 2.5rem;
+    font-family: var(--sans);
+  }
+
+  .for-divider { width: 20px; height: 1px; background: rgba(255,255,255,0.12); }
+
+  .panel-btn {
+    display: inline-flex; align-items: center; gap: 0.625rem;
+    font-family: var(--sans);
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.8rem 1.75rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .panel-gcse .panel-btn {
+    background: var(--gold);
+    color: var(--navy);
+  }
+
+  .panel-gcse .panel-btn:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(201,168,76,0.25);
+  }
+
+  .panel-11plus .panel-btn {
+    background: #4a7c59;
+    color: white;
+  }
+
+  .panel-11plus .panel-btn:hover {
+    background: #5a9169;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(74,124,89,0.3);
+  }
+
+  .panel-arrow { transition: transform 0.2s; }
+
+  .panel-chips {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 0.375rem;
+    margin-top: 2rem;
+  }
+
+  .panel-chip {
+    font-size: 0.68rem;
+    font-weight: 500;
+    padding: 0.2rem 0.6rem;
+    border-radius: 100px;
+    border: 1px solid;
+  }
+
+  .panel-gcse .panel-chip {
+    border-color: rgba(201,168,76,0.25);
+    color: rgba(201,168,76,0.6);
+  }
+
+  .panel-11plus .panel-chip {
+    border-color: rgba(74,124,89,0.3);
+    color: rgba(122,171,136,0.7);
+  }
+
+  /* ── CENTRE LOGO ── */
+  .centre-mark {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background: var(--navy);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 50%;
+    width: 56px; height: 56px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 0 8px rgba(15,27,45,0.8);
+  }
+
+  .centre-mark-inner {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.05em;
+    line-height: 1.3;
+    text-align: center;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 1.25rem 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-shrink: 0;
+  }
+
+  .footer-copy {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.18);
+    font-family: var(--sans);
+  }
+
+  .footer-legal { display: flex; gap: 1.5rem; }
+
+  .footer-legal a {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.2);
+    text-decoration: none;
+    transition: color 0.15s;
+    font-family: var(--sans);
+  }
+
+  .footer-legal a:hover { color: rgba(255,255,255,0.5); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 0 1.25rem; }
+    .split { grid-template-columns: 1fr; }
+    .split::after { display: none; }
+    .panel { padding: 4rem 2rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .centre-mark { display: none; }
+    footer { flex-direction: column; gap: 0.75rem; text-align: center; padding: 1.25rem; }
+    .footer-legal { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">pass<span class="dot">-</span>ai<span class="dot">.</span>co<span class="dot">.</span>uk</div>
+  <div class="nav-tag">AI Exam Preparation · Coming Spring 2026</div>
+</nav>
+
+<div class="split">
+
+  <!-- GCSE PANEL -->
+  <a class="panel panel-gcse" href="gcse.html">
+    <div class="panel-tag">
+      <div class="tag-dot gcse-dot"></div>
+      pass-ai · GCSE
+    </div>
+    <div class="panel-name">pass<span class="slash">-</span>ai<span class="slash"> · </span><span class="product">GCSE</span></div>
+    <h2 class="panel-headline">Study smarter.<br><em>Achieve more.</em></h2>
+    <p class="panel-desc">AI revision planning, flashcards, essay feedback, and Oxbridge interview prep for GCSE and A-Level students.</p>
+    <div class="panel-for">
+      Years 10 & 11
+      <div class="for-divider"></div>
+      Sixth Form
+      <div class="for-divider"></div>
+      A-Level
+    </div>
+    <span class="panel-btn">
+      GCSE & A-Level prep
+      <svg class="panel-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </span>
+    <div class="panel-chips">
+      <span class="panel-chip">AQA · OCR · Edexcel · CIE</span>
+      <span class="panel-chip">Revision Planner</span>
+      <span class="panel-chip">Essay Feedback</span>
+      <span class="panel-chip">Oxbridge Prep</span>
+    </div>
+  </a>
+
+  <!-- 11+ PANEL -->
+  <a class="panel panel-11plus" href="11plus.html">
+    <div class="panel-tag">
+      <div class="tag-dot plus-dot"></div>
+      pass-ai · 11+
+    </div>
+    <div class="panel-name">pass<span class="slash">-</span>ai<span class="slash"> · </span><span class="product">11+</span></div>
+    <h2 class="panel-headline">Help your child earn their <em>dream place</em></h2>
+    <p class="panel-desc">AI-powered 11+ preparation for grammar and independent school entrance exams. Built for children aged 8–11, managed by parents.</p>
+    <div class="panel-for">
+      Ages 8–11
+      <div class="for-divider"></div>
+      Grammar Schools
+      <div class="for-divider"></div>
+      Independent Schools
+    </div>
+    <span class="panel-btn">
+      11+ preparation
+      <svg class="panel-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </span>
+    <div class="panel-chips">
+      <span class="panel-chip">CEM · GL Assessment</span>
+      <span class="panel-chip">Mock Papers</span>
+      <span class="panel-chip">Parent Reports</span>
+      <span class="panel-chip">GDPR & COPPA Safe</span>
+    </div>
+  </a>
+
+  <!-- CENTRE MARK -->
+  <div class="centre-mark">
+    <div class="centre-mark-inner">pass<br>ai</div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-copy">© 2026 pass-ai Ltd · Registered in England & Wales · pass-ai.co.uk</div>
+  <div class="footer-legal">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">Contact</a>
+    <a href="#">GDPR</a>
+  </div>
+</footer>
+
+</body>
+</html>
