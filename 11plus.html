@@ -661,49 +661,81 @@
 </footer>
 
 <script>
+  const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, {
+  threshold: 0.1
+});
+
+document.querySelectorAll('.reveal').forEach(el => {
+  observer.observe(el);
+});
   function scrollToForm() { window.scrollTo({ top: 0, behavior: 'smooth' }); setTimeout(() => document.getElementById('hero-email').focus(), 600); }
 
-  function handleSignup(id) {
-    const input = document.getElementById(id === 'hero' ? 'hero-email' : 'final-email');
-    if (!input.value.trim() || !input.value.includes('@')) { input.style.outline = '2px solid var(--amber)'; input.focus(); return; }
-    if (id === 'hero') { document.getElementById('hero-form').style.display = 'none'; document.getElementById('hero-success').style.display = 'block'; }
-    else { const b = document.querySelector('.final-btn'); b.textContent = "🎉 You're on the list!"; b.style.background = '#4a7c59'; input.value = ''; }
-    console.log('pass-ai 11+ signup:', input.value);
-    // await supabase.from('waitlist').insert({ email: input.value, product: '11plus', source: id, created_at: new Date() })
-  }
+  async function handleSignup(source = "hero") {
 
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && document.activeElement.id === 'hero-email') handleSignup('hero');
-    if (e.key === 'Enter' && document.activeElement.id === 'final-email') handleSignup('final');
-  });
+  const emailInput = document.getElementById(
+    source === "final" ? "final-email" : "hero-email"
+  );
 
-  const obs = new IntersectionObserver((entries) => { entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 70); }); }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-</script>
-<script>
-async function handleSignup() {
-  const honeypot = document.getElementById("company-field").value;
-  if (honeypot) return;
-  const input = document.getElementById("hero-email");
-  const email = input.value.trim();
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  if (!emailRegex.test(email)) {
-    alert("Please enter a valid email address.");
+  if (!emailInput) {
+    console.error("Email input not found for source:", source);
     return;
   }
 
+  const email = emailInput.value.trim();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(email)) {
+    emailInput.style.outline = '2px solid var(--gold)';
+    emailInput.focus();
+    return;
+  }
+
+  const exam = window.location.pathname.includes("11plus")
+    ? "11plus"
+    : "gcse";
+
+  try {
   const res = await fetch("/api/waitlist", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, exam: "11plus" })
+    body: JSON.stringify({ email, exam })
   });
 
-  const data = await res.json();
-  if (data.error) return alert(data.error);
+  if (!res.ok) {
+    throw new Error("Network response was not ok");
+  }
 
-  input.value = "";
-  document.getElementById("successMessage").style.display = "block";
+  const data = await res.json();
+
+  if (!data.success) {
+    throw new Error("API returned failure");
+  }
+
+} catch (err) {
+  console.error("Signup failed:", err);
+  alert("Something went wrong. Please try again.");
+  return;
+}
+
+  emailInput.value = "";
+
+  if (source === "hero") {
+    const heroSuccess = document.getElementById("successMessage");
+    if (heroSuccess) heroSuccess.style.display = "block";
+  } else {
+    const b = document.querySelector('.final-btn');
+    if (b) {
+      b.textContent = "🎉 You're on the list!";
+      b.style.background = '#6bcb77';
+    }
+  }
+
   loadCount();
 }
 
