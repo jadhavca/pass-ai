@@ -786,6 +786,8 @@
 </script>
 <script>
 async function handleSignup() {
+  const honeypot = document.getElementById("company-field").value;
+  if (honeypot) return;
   const input = document.getElementById("hero-email");
   const email = input.value.trim();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
