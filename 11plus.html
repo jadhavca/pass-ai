@@ -627,9 +627,16 @@
   <h2 class="section-title">Be first when we launch</h2>
   <p class="section-sub" style="margin:0.875rem auto 0;max-width:420px;">Early access. Launch discount. No spam — just pass-ai · 11+ in your inbox the moment it's ready.</p>
   <div class="final-form">
-    <input class="final-input" id="final-email" type="email" placeholder="Your email address…">
-    <button class="final-btn" onclick="handleSignup('final')">Notify me →</button>
-  </div>
+  <input type="text" id="company-field-final" style="display:none">
+  <input class="final-input" id="final-email" type="email" placeholder="Your email address…">
+  <button class="final-btn" onclick="handleSignup('final')">
+    Notify me →
+  </button>
+</div>
+
+<div class="waitlist-success" id="successMessage-final">
+  You’re on the early access list.
+</div>
   <div class="final-fine">GDPR compliant · UK data storage · Unsubscribe anytime</div>
 </section>
 
