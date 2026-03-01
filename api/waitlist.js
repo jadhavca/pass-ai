@@ -27,7 +27,7 @@ export default async function handler(req, res) {
 
     // Send confirmation email
     await resend.emails.send({
-      from: 'Pass AI <onboarding@resend.dev>',
+      from: 'Pass AI <hello@pass-ai.co.uk>',
       to: email,
       subject: 'You’re on the Pass AI early access list',
       html: `
