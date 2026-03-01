@@ -92,7 +92,7 @@
     padding: 4rem 3rem;
     position: relative;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
     text-decoration: none;
     overflow: hidden;
   }
@@ -102,10 +102,12 @@
     position: absolute;
     inset: 0;
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity 0.3s ease;
   }
 
   .panel:hover::before { opacity: 1; }
+  .panel:hover { transform: translateY(-2px); }
+  .panel:focus-within { outline: 2px solid rgba(255,255,255,0.15); outline-offset: -4px; }
 
   .panel-gcse::before { background: radial-gradient(ellipse at center, rgba(201,168,76,0.07) 0%, transparent 70%); }
   .panel-11plus::before { background: radial-gradient(ellipse at center, rgba(74,124,89,0.1) 0%, transparent 70%); }
@@ -118,7 +120,10 @@
     letter-spacing: 0.12em;
     margin-bottom: 2rem;
     display: flex; align-items: center; gap: 0.5rem;
+    transition: transform 0.3s ease;
   }
+
+  .panel:hover .panel-tag { transform: translateY(-2px); }
 
   .panel-gcse .panel-tag { color: var(--gold); }
   .panel-11plus .panel-tag { color: var(--sage-light, #7aab88); }
@@ -159,7 +164,10 @@
     text-align: center;
     margin-bottom: 1.25rem;
     max-width: 380px;
+    transition: transform 0.3s ease;
   }
+
+  .panel:hover .panel-headline { transform: translateY(-2px); }
 
   .panel-gcse .panel-headline { color: var(--cream); }
   .panel-11plus .panel-headline { color: var(--cream); }
@@ -175,7 +183,10 @@
     max-width: 320px;
     line-height: 1.75;
     margin-bottom: 2rem;
+    transition: transform 0.3s ease;
   }
+
+  .panel:hover .panel-desc { transform: translateY(-1px); }
 
   .panel-for {
     display: flex; align-items: center; gap: 0.5rem;
@@ -208,8 +219,12 @@
 
   .panel-gcse .panel-btn:hover {
     background: var(--gold-light);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(201,168,76,0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(201,168,76,0.3);
+  }
+
+  .panel-gcse .panel-btn:active {
+    transform: translateY(-1px);
   }
 
   .panel-11plus .panel-btn {
@@ -219,8 +234,12 @@
 
   .panel-11plus .panel-btn:hover {
     background: #5a9169;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(74,124,89,0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(74,124,89,0.35);
+  }
+
+  .panel-11plus .panel-btn:active {
+    transform: translateY(-1px);
   }
 
   .panel-arrow { transition: transform 0.2s; }
@@ -283,6 +302,7 @@
     font-size: 0.72rem;
     color: rgba(255,255,255,0.18);
     font-family: var(--sans);
+    transition: color 0.15s ease;
   }
 
   .footer-legal { display: flex; gap: 1.5rem; }
@@ -291,11 +311,12 @@
     font-size: 0.72rem;
     color: rgba(255,255,255,0.2);
     text-decoration: none;
-    transition: color 0.15s;
+    transition: all 0.15s ease;
     font-family: var(--sans);
   }
 
   .footer-legal a:hover { color: rgba(255,255,255,0.5); }
+  .footer-legal a:focus { outline: 2px solid rgba(255,255,255,0.3); outline-offset: 2px; }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
@@ -319,7 +340,7 @@
 <div class="split">
 
   <!-- GCSE PANEL -->
-  <a class="panel panel-gcse" href="/gcse.html">
+  <a class="panel panel-gcse" href="/gcse.html" aria-label="GCSE and A-Level preparation with AI revision planning and essay feedback">
     <div class="panel-tag">
       <div class="tag-dot gcse-dot"></div>
       pass-ai · GCSE
@@ -334,9 +355,9 @@
       <div class="for-divider"></div>
       A-Level
     </div>
-    <span class="panel-btn">
+    <span class="panel-btn" role="button" tabindex="0" title="Go to GCSE preparation page">
       GCSE & A-Level prep
-      <svg class="panel-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <svg class="panel-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </span>
     <div class="panel-chips">
       <span class="panel-chip">AQA · OCR · Edexcel · CIE</span>
@@ -347,7 +368,7 @@
   </a>
 
   <!-- 11+ PANEL -->
-  <a class="panel panel-11plus" href="/11plus.html">
+  <a class="panel panel-11plus" href="/11plus.html" aria-label="11+ exam preparation with AI tutoring and mock papers for children aged 8–11">
     <div class="panel-tag">
       <div class="tag-dot plus-dot"></div>
       pass-ai · 11+
@@ -362,9 +383,9 @@
       <div class="for-divider"></div>
       Independent Schools
     </div>
-    <span class="panel-btn">
+    <span class="panel-btn" role="button" tabindex="0" title="Go to 11+ preparation page">
       11+ preparation
-      <svg class="panel-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <svg class="panel-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </span>
     <div class="panel-chips">
       <span class="panel-chip">CEM · GL Assessment</span>
@@ -384,10 +405,10 @@
 <footer>
   <div class="footer-copy">© 2026 pass-ai.co.uk</div>
   <div class="footer-legal">
-    <a href="#">Privacy</a>
-    <a href="#">Terms</a>
-    <a href="#">Contact</a>
-    <a href="#">GDPR</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy.html">GDPR</a>
   </div>
 </footer>
 

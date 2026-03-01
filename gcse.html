@@ -73,7 +73,8 @@
     padding: 0.55rem 1.25rem; border-radius: 6px; transition: all 0.2s;
   }
 
-  .btn-nav:hover { background: var(--navy-mid); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(15,27,45,0.2); }
+  .btn-nav:hover { background: var(--navy-mid); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(15,27,45,0.25); }
+  .btn-nav:active { transform: translateY(0); }
 
   /* ── HERO ── */
   .hero {
@@ -140,7 +141,7 @@
     transition: border-color 0.2s, box-shadow 0.2s;
   }
 
-  .waitlist-form:focus-within { border-color: var(--navy); box-shadow: 0 4px 24px rgba(15,27,45,0.12); }
+  .waitlist-form:focus-within { border-color: var(--navy); box-shadow: 0 8px 32px rgba(15,27,45,0.15); }
 
   .waitlist-input {
     flex: 1; border: none; outline: none;
@@ -153,10 +154,11 @@
   .waitlist-btn {
     font-family: var(--sans); font-size: 0.875rem; font-weight: 600;
     color: var(--cream); background: var(--navy); border: none; cursor: pointer;
-    padding: 0.9rem 1.375rem; transition: background 0.2s; white-space: nowrap;
+    padding: 0.9rem 1.375rem; transition: all 0.2s; white-space: nowrap;
   }
 
-  .waitlist-btn:hover { background: var(--navy-mid); }
+  .waitlist-btn:hover { background: var(--navy-mid); transform: translateY(-1px); }
+  .waitlist-btn:active { transform: translateY(0); }
 
   .waitlist-success {
     display: none; background: rgba(15,27,45,0.05);
@@ -315,7 +317,7 @@
     padding: 1.75rem; transition: all 0.2s;
   }
 
-  .feat-card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(15,27,45,0.07); }
+  .feat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(15,27,45,0.1); }
   .feat-card.wide { grid-column: span 2; }
 
   .feat-icon { width: 40px; height: 40px; background: var(--navy); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.125rem; }
@@ -357,8 +359,9 @@
   .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
 
   .pricing-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 14px; padding: 2rem; position: relative; transition: all 0.2s; }
-  .pricing-card:hover { box-shadow: 0 8px 32px rgba(15,27,45,0.08); }
+  .pricing-card:hover { box-shadow: 0 12px 40px rgba(15,27,45,0.1); transform: translateY(-2px); }
   .pricing-card.featured { background: var(--navy); border-color: transparent; }
+  .pricing-card.featured:hover { box-shadow: 0 12px 40px rgba(15,27,45,0.2); }
 
   .pricing-card.featured::before {
     content: 'Launch Pricing';
@@ -388,9 +391,9 @@
 
   .plan-cta { width: 100%; margin-top: 1.75rem; padding: 0.75rem; border-radius: 8px; font-family: var(--sans); font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
   .cta-outline { background: transparent; border: 1.5px solid rgba(15,27,45,0.2); color: var(--navy); }
-  .cta-outline:hover { border-color: var(--navy); background: rgba(15,27,45,0.04); }
+  .cta-outline:hover { border-color: var(--navy); background: rgba(15,27,45,0.04); transform: translateY(-2px); }
   .cta-gold { background: var(--gold); border: none; color: var(--navy); }
-  .cta-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .cta-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(201,168,76,0.2); }
 
   /* ── FINAL CTA ── */
   .final-cta { background: var(--navy); padding: 6rem 2rem; text-align: center; }
@@ -400,15 +403,16 @@
   .final-form {
     display: flex; max-width: 440px; margin: 0 auto;
     background: rgba(255,255,255,0.07); border: 1.5px solid rgba(255,255,255,0.12);
-    border-radius: 10px; overflow: hidden;
+    border-radius: 10px; overflow: hidden; transition: all 0.2s;
   }
 
-  .final-form:focus-within { border-color: var(--gold); }
+  .final-form:focus-within { border-color: var(--gold); box-shadow: 0 8px 32px rgba(201,168,76,0.15); }
 
   .final-input { flex: 1; border: none; outline: none; padding: 0.9rem 1.125rem; font-family: var(--sans); font-size: 0.9rem; color: var(--cream); background: transparent; }
   .final-input::placeholder { color: rgba(247,243,236,0.3); }
-  .final-btn { font-family: var(--sans); font-size: 0.875rem; font-weight: 600; color: var(--navy); background: var(--gold); border: none; cursor: pointer; padding: 0.9rem 1.5rem; transition: background 0.2s; white-space: nowrap; }
-  .final-btn:hover { background: var(--gold-light); }
+  .final-btn { font-family: var(--sans); font-size: 0.875rem; font-weight: 600; color: var(--navy); background: var(--gold); border: none; cursor: pointer; padding: 0.9rem 1.5rem; transition: all 0.2s; white-space: nowrap; }
+  .final-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .final-btn:active { transform: translateY(0); }
   .final-fine { margin-top: 0.875rem; font-size: 0.72rem; color: rgba(247,243,236,0.22); }
 
   /* ── FOOTER ── */
@@ -485,18 +489,19 @@
       class="waitlist-input"
       type="email"
       placeholder="Student email address"
+      aria-label="Student email address"
       required
     />
-    <button class="waitlist-btn" onclick="handleSignup()">
+    <button class="waitlist-btn" onclick="handleSignup()" type="button" aria-label="Join waitlist">
       Join Waitlist
     </button>
   </div>
 
-  <div class="waitlist-success" id="successMessage">
-    You’re on the early access list.
+  <div class="waitlist-success" id="successMessage" role="status" aria-live="polite">
+    You're on the early access list.
   </div>
 
-  <p id="waitlistCount" class="waitlist-fine"></p>
+  <p id="waitlistCount" class="waitlist-fine" role="status" aria-live="polite"></p>
 </div>
 
   <div class="trust-strip">
@@ -739,14 +744,14 @@
   <p class="section-sub">Early access. Launch discount. No spam — just pass-ai · GCSE in your inbox the moment it's ready.</p>
   <div class="final-form">
   <input type="text" id="company-field-final" style="display:none">
-  <input class="final-input" id="final-email" type="email" placeholder="Your email address…">
-  <button class="final-btn" onclick="handleSignup('final')">
+  <input class="final-input" id="final-email" type="email" placeholder="Your email address…" aria-label="Email address for waitlist notification">
+  <button class="final-btn" onclick="handleSignup('final')" type="button" aria-label="Notify me when launch">
     Notify me →
   </button>
 </div>
 
-<div class="waitlist-success" id="successMessage-final">
-  You’re on the early access list.
+<div class="waitlist-success" id="successMessage-final" role="status" aria-live="polite">
+  You're on the early access list.
 </div>
   <div class="final-fine">GDPR compliant · UK data only · Unsubscribe anytime</div>
 </section>
@@ -760,9 +765,10 @@
     <div class="footer-right">
       <ul class="footer-links">
         <li><a href="index.html">← pass-ai.co.uk</a></li>
-        <li><a href="#">Privacy</a></li>
-        <li><a href="#">Terms</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="/privacy.html">Privacy</a></li>
+        <li><a href="/terms.html">Terms</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+        <li><a href="/privacy.html">GDPR</a></li>
       </ul>
       <div class="footer-badges">
         <span class="f-badge">GDPR</span><span class="f-badge">UK Data</span><span class="f-badge">ICO Registered</span>
